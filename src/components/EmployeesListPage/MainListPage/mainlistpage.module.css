@@ -1,11 +1,11 @@
 .container {
+    padding: 48px 80px 56px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
-
 .btn {
-    align-self: center;
     padding: 8px 16px;
     border: 1px solid var(--black);
     border-radius: 8px;
@@ -14,10 +14,5 @@
     line-height: 136.19%;
     color: var(--black);
     cursor: pointer;
-    background-color: transparent;
-
-}
-
-.btn svg {
-    margin-left: 6px;
+    outline: none;
 }

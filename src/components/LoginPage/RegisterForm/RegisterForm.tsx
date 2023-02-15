@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './registerform.module.css';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
+import { ReactComponent as CrossEyeSVG } from '../../../assets/img/crossEye.svg'
+import { ReactComponent as EyeSVG } from '../../../assets/img/eye.svg'
 
 interface Values {
   name: string;
@@ -22,10 +24,8 @@ export function RegisterForm() {
         values: Values,
         { setSubmitting }: FormikHelpers<Values>
       ) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 500);
+        console.log(values);
+        
       }}
     >
       <Form className={styles.form}>
@@ -43,20 +43,26 @@ export function RegisterForm() {
           type="email"
         />
         <label className={styles.label} htmlFor="password">Пароль</label>
-        <Field
-          id="password"
-          name="password"
-          placeholder="Введите пароль"
-          type="password"
-        />
-        <label className={styles.label} htmlFor="passwordConfirum">Подтвердите пароль</label>
-        <Field
-          id="passwordConfirum"
-          name="passwordConfirum"
-          placeholder="Повторите пароль"
-          type="password"
-        />
+        <div className={styles.wrapper}>
 
+          <Field
+            id="password"
+            name="password"
+            placeholder="Введите пароль"
+            type="password"
+          />
+          <CrossEyeSVG />
+        </div>
+        <label className={styles.label} htmlFor="passwordConfirum">Подтвердите пароль</label>
+        <div className={styles.wrapper}>
+          <Field
+            id="passwordConfirum"
+            name="passwordConfirum"
+            placeholder="Повторите пароль"
+            type="password"
+          />
+          <CrossEyeSVG />
+        </div>
         <button className={styles.btn} type="submit">Зарегистрироваться</button>
       </Form>
     </Formik>

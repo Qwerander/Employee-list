@@ -1,0 +1,41 @@
+.header {
+    padding: 32px 80px 64px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--violet);
+}
+
+.btn {
+    align-self: flex-end;
+    padding: 8px 16px;
+    border: 1px solid var(--light-grey);
+    border-radius: 8px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 136.19%;
+    color: var(--light-grey);
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.title {
+    margin: 0;
+    margin-bottom: 16px;
+    align-self: center;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 75px;
+    color: var(--white)
+}
+
+.text {
+    margin: 0;
+    align-self: center;
+    max-width: 65%;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    color: var(--light-grey);
+}
