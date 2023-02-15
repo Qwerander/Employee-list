@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './registerform.module.css';
 import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { ReactComponent as CrossEyeSVG } from '../../../assets/img/crossEye.svg'
 import { ReactComponent as EyeSVG } from '../../../assets/img/eye.svg'
+import { getTokenRegister } from '../../../store/reducers/tokenSlice';
+import { useAppDispatch, useAppSelector } from '../../../store/hooks';
+import { useHistory } from 'react-router-dom';
 
 interface Values {
   name: string;
@@ -12,11 +15,14 @@ interface Values {
 }
 
 export function RegisterForm() {
+
+
+  const dispatch = useAppDispatch()
   return (
     <Formik
       initialValues={{
         name: '',
-        email: '',
+        email: 'eve.holt@reqres.in',
         password: '',
         passwordConfirum: '',
       }}
@@ -24,8 +30,7 @@ export function RegisterForm() {
         values: Values,
         { setSubmitting }: FormikHelpers<Values>
       ) => {
-        console.log(values);
-        
+        dispatch(getTokenRegister(values.email, values.password))
       }}
     >
       <Form className={styles.form}>

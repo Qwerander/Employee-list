@@ -3,7 +3,7 @@ import styles from './mainemployee.module.css';
 import { ReactComponent as PhoneSVG } from '../../../assets/img/phone.svg';
 import { ReactComponent as MailSVG } from '../../../assets/img/mail.svg';
 
-export function MainEmployee() {
+export function MainEmployee({email}: {email: string}) {
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -16,11 +16,11 @@ export function MainEmployee() {
       <div className={styles.right}>
         <div className={styles.contact}>
           <PhoneSVG />
-          121314
+          +7(999) 999 99 99
         </div>
         <div className={styles.contact}>
           <MailSVG />
-          akj;gn;unf
+          {email}
         </div>
       </div>
     </div>
