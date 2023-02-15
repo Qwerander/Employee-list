@@ -21,6 +21,9 @@ img {
 :root {
   --white: #fff;
   --black: #151317;
+  --light-grey: #F8F8F8;
+  --grey: #808185;
+  --violet: #512689;
 
   --shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
 
@@ -30,13 +33,10 @@ img {
   --tomatoo: #EE735D;
   --red: #DC3E22;
   --dark-red: #B7280F;
-  --light-grey: #F4F4F4;
-  --medium-grey: #ECECEC;
   --silver: #C4C4C4;
   --dark-grey: #999;
   --gold: #FFAE35;
   --yellow: #FFDDA9;
-  --violet: #9C97D7;
   --sky: #DFDCFE;
   --aqua: #7FC2D7;
   --azure: #C5F1FF;
