@@ -4,7 +4,7 @@ import { Field, Form, Formik } from 'formik';
 import { useAppDispatch } from '../../../store/hooks';
 import { getTokenRegister } from '../../../store/reducers/tokenSlice';
 import { ReactComponent as CrossEyeSVG } from '../../../assets/img/crossEye.svg'
-import { ReactComponent as EyeSVG } from '../../../assets/img/eye.svg'
+// import { ReactComponent as EyeSVG } from '../../../assets/img/eye.svg'
 import * as yup from 'yup';
 
 interface Values {

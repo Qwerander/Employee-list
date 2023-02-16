@@ -41,3 +41,22 @@
     line-height: 23px;
     color: var(--black);
 }
+
+
+@media (max-width: 992px) {
+    .card {
+        width: calc((100% / 3) - 15px);
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: calc((100% / 2) - 15px);
+    }
+}
+
+@media (max-width: 512px) {
+    .card {
+        width: 100% ;
+    }
+}

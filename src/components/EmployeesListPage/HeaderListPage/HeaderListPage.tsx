@@ -1,19 +1,21 @@
 import React from 'react';
 import styles from './headerlistpage.module.css';
 import { useAppDispatch } from '../../../store/hooks';
-import { deleteToken } from '../../../store/reducers/tokenSlice';
+import { deleteTokenThunk } from '../../../store/reducers/tokenSlice';
+import { ReactComponent as ExitSVG } from '../../../assets/img/exit.svg';
 
 export function HeaderListPage() {
   const dispatch = useAppDispatch()
   
   const handleClickExit = () => {
-    dispatch(deleteToken())  
+    dispatch(deleteTokenThunk())  
   }
-  
+
   return (
     <div className={styles.header}>
       <button className={styles.btn} onClick={handleClickExit}>
         Выход
+        <ExitSVG />
       </button>
 
       <h1 className={styles.title}>

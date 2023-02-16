@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './registerform.module.css';
 import { Field, Form, Formik } from 'formik';
 import { ReactComponent as CrossEyeSVG } from '../../../assets/img/crossEye.svg'
-import { ReactComponent as EyeSVG } from '../../../assets/img/eye.svg'
+// import { ReactComponent as EyeSVG } from '../../../assets/img/eye.svg'
 import { getTokenRegister } from '../../../store/reducers/tokenSlice';
 import { useAppDispatch } from '../../../store/hooks';
 import * as yup from 'yup';

@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppThunk } from '../store';
 import { api } from '../../components/api/api';
 
 
@@ -50,16 +50,23 @@ export const { setToken, deleteToken } = tokenSlice.actions;
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectToken = (state: RootState) => state.token;
+// export const selectToken = (state: RootState) => state.token;
+
+export const deleteTokenThunk = (): AppThunk  => 
+  (dispatch) => {
+    localStorage.removeItem('token')
+    dispatch(deleteToken())
+  }
 
 export const getTokenRegister =
   (email: string, password: string): AppThunk =>
     (dispatch) => {
       
       api.register(email, password)
-        .then(res => 
+        .then(res => {
+        localStorage.setItem('token', JSON.stringify(res.token))
         dispatch(setToken({token: res.token}))
-        )
+        })
       
     };
 

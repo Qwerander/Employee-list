@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../store';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppThunk } from '../store';
 import { api, UserType } from '../../components/api/api';
 
 
@@ -28,7 +28,7 @@ const initialState: TokenStateType = {
 // );
 
 export const usersSlice = createSlice({
-  name: 'token',
+  name: 'users',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
