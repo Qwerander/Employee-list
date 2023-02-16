@@ -54,3 +54,13 @@
     color: var(--white);
     cursor: pointer;
 }
+
+.error {
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    color: var(--red);
+}

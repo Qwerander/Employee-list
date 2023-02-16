@@ -1,5 +1,8 @@
 import React from 'react';
 import styles from './headeremployee.module.css';
+import { useHistory } from 'react-router-dom';
+import { useAppDispatch } from '../../../store/hooks';
+import { deleteToken } from '../../../store/reducers/tokenSlice';
 
 type HeaderEmployeeType = {
   avatar: string
@@ -8,13 +11,22 @@ type HeaderEmployeeType = {
 }
 
 export function HeaderEmployee({ avatar, firstName, lastName }: HeaderEmployeeType) {
-  // console.log(avatar);
+  const history = useHistory()
+  const dispatch = useAppDispatch()
+
+  const handleClickBack = () => {
+    history.push('/list')
+  }
+
+  const handleClickExit = () => {
+    dispatch(deleteToken())  
+  }
   
   return (
     <div className={styles.header}>
         <div className={styles.top}>
-            <button className={styles.btn}>Выход</button>
-            <button className={styles.btn}>Назад</button>
+            <button className={styles.btn} onClick={handleClickBack}>Назад</button>
+            <button className={styles.btn} onClick={handleClickExit}>Выход</button>
         </div>
         <div className={styles.bottom}>
           <img className={styles.img} src={avatar} alt="Аватар" />
