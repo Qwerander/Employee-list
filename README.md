@@ -1,4 +1,4 @@
-# Employee-List
+# Employees-List
 
 Ознакомится с приложением можно здесь
 https://qwerander.github.io/Employee-list/
