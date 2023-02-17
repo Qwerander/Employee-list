@@ -33,11 +33,15 @@ type RequestUsersType = {
     data: Array<UserType>
 }
 
+type RequestUserType = {
+    data: UserType
+}
+
 type ApiType = {
     register: (email: string, password: string) => Promise<RequestRegisterType>;
     login: (email: string, password: string) => Promise<RequestLoginType>;
-    getUsers: (token: string) => Promise<RequestUsersType>;
-    getUser: (token: string, id: number) => Promise<UserType>;
+    getUsers: (token: string, page: number) => Promise<RequestUsersType>;
+    getUser: (token: string, id: number) => Promise<RequestUserType>;
 }
 
 export const api: ApiType = {
@@ -59,8 +63,9 @@ export const api: ApiType = {
         return resp.data;
     },
 
-    getUsers: async (token) => {
-        const resp = await instance.get('users',
+    getUsers: async (token, page) => {
+        
+        const resp = await instance.get(`users?page=${page}`,
             {
                 headers: { 'Authorization': `Basic ${token}` }
             }
@@ -69,6 +74,8 @@ export const api: ApiType = {
     },
 
     getUser: async (token, id) => {
+        console.log(id);
+        
         const resp = await instance.get(`users/${id}`,
             {
                 headers: { 'Authorization': `Basic ${token}` }

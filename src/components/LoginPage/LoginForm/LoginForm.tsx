@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './loginform.module.css';
 import { Field, Form, Formik } from 'formik';
 import { useAppDispatch } from '../../../store/hooks';
-import { getTokenRegister } from '../../../store/reducers/tokenSlice';
+import { getTokenLogin } from '../../../store/reducers/tokenSlice';
 import { ReactComponent as CrossEyeSVG } from '../../../assets/img/crossEye.svg'
-// import { ReactComponent as EyeSVG } from '../../../assets/img/eye.svg'
+import { ReactComponent as EyeSVG } from '../../../assets/img/eye.svg'
 import * as yup from 'yup';
 
 interface Values {
@@ -13,6 +13,8 @@ interface Values {
 }
 
 export function LoginForm() {
+  const [hidePass, toggleHidePass] = useState(true)
+
   const validationSchema = yup.object().shape({
     email: yup.string().email('Введите корректный email').required('Обязательно введите email'),
     password: yup.string().required('Обязательно введите пароль')
@@ -28,7 +30,7 @@ export function LoginForm() {
       onSubmit={(
         values: Values
       ) => {
-        dispatch(getTokenRegister(values.email, values.password))
+        dispatch(getTokenLogin(values.email, values.password))
       }}
       validationSchema={validationSchema}
     >
@@ -55,12 +57,17 @@ export function LoginForm() {
               id="password"
               name="password"
               placeholder="Введите пароль"
-              type="password"
+              type={hidePass ? 'password' : 'text'}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
             />
-               <CrossEyeSVG />
+            <span onClick={() => toggleHidePass(hidePass ? false : true)}>
+              {hidePass 
+              ? <CrossEyeSVG />
+              : <EyeSVG />
+              }
+            </span>
             {touched.password && errors.password && <p className={styles.error}>{errors.password}</p>}
           </div>
           <button

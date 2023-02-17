@@ -24,7 +24,7 @@ export function EmployeePage() {
 
 
   useEffect(() => {
-    if (!token) {
+    if (!token || token === '') {
       history.push('/login')
     } 
   }, [token, history])

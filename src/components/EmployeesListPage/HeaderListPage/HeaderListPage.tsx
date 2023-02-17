@@ -3,12 +3,15 @@ import styles from './headerlistpage.module.css';
 import { useAppDispatch } from '../../../store/hooks';
 import { deleteTokenThunk } from '../../../store/reducers/tokenSlice';
 import { ReactComponent as ExitSVG } from '../../../assets/img/exit.svg';
+import { deleteUsers } from '../../../store/reducers/usersSlice';
 
 export function HeaderListPage() {
   const dispatch = useAppDispatch()
   
   const handleClickExit = () => {
     dispatch(deleteTokenThunk())  
+    dispatch(deleteUsers())  
+    
   }
 
   return (

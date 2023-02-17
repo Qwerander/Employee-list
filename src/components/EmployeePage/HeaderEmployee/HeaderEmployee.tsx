@@ -5,6 +5,7 @@ import { useAppDispatch } from '../../../store/hooks';
 import { deleteTokenThunk } from '../../../store/reducers/tokenSlice';
 import { ReactComponent as ExitSVG } from '../../../assets/img/exit.svg';
 import { ReactComponent as BackSVG } from '../../../assets/img/back.svg';
+import { deleteUsers } from '../../../store/reducers/usersSlice';
 
 type HeaderEmployeeType = {
   avatar: string
@@ -17,11 +18,12 @@ export function HeaderEmployee({ avatar, firstName, lastName }: HeaderEmployeeTy
   const dispatch = useAppDispatch()
 
   const handleClickBack = () => {
-    history.push('/list')
+    history.push('/users')
   }
 
   const handleClickExit = () => {
     dispatch(deleteTokenThunk())
+    dispatch(deleteUsers())
   }
 
   return (

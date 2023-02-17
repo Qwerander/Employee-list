@@ -5,78 +5,88 @@ import { api, UserType } from '../../components/api/api';
 
 export type TokenStateType = {
   users: Array<UserType>
-
+  currentPage: number
+  totalPages: number
+  totalUsers: number
 }
 
 const initialState: TokenStateType = {
   users: [],
+  currentPage: 0,
+  totalPages: 0,
+  totalUsers: 0
 
-};
-
-// The function below is called a thunk and allows us to perform async logic. It
-// can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
-// will call the thunk with the `dispatch` function as the first argument. Async
-// code can then be executed and other actions can be dispatched. Thunks are
-// typically used to make async requests.
-// export const incrementAsync = createAsyncThunk(
-//   'counter/fetchCount',
-//   async (amount: number) => {
-//     // const response = await fetchCount(amount);
-//     // // The value we return becomes the `fulfilled` action payload
-//     return response.data;
-//   }
-// );
+}
 
 export const usersSlice = createSlice({
   name: 'users',
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    setUsers: (state, action: PayloadAction<{users: Array<UserType>}>) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.users = action.payload.users;
+    setUsers: (
+      state,
+      action: PayloadAction<{
+        users: Array<UserType>,
+        currentPage: number,
+        totalPages: number,
+        totalUsers: number
+      }>
+    ) => {
+
+      state.users = action.payload.users
+      state.currentPage = action.payload.currentPage
+      state.totalPages = action.payload.totalPages
+      state.totalUsers = action.payload.totalUsers
+    },
+    setMoreUsers: (state, action: PayloadAction<{ users: Array<UserType>, currentPage: number }>) => {
+      state.users.push(...action.payload.users)
+      state.currentPage = action.payload.currentPage
     },
 
-    setUser: (state, action: PayloadAction<{user: UserType}>) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
+    setUser: (state, action: PayloadAction<{ user: UserType }>) => {
       state.users.push(action.payload.user);
     },
+    deleteUsers: (state) => {
+      state.users = []
+      state.currentPage = 0
+      state.totalPages = 0
+      state.totalUsers = 0
+    }
   }
 });
 
-export const { setUsers, setUser } = usersSlice.actions;
-
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-// export const selectToken = (state: RootState) => state.token;
+export const { setUsers, setUser, setMoreUsers, deleteUsers } = usersSlice.actions;
 
 export const getUsersThunk =
-  (token: string): AppThunk =>
+  (token: string, page = 1): AppThunk =>
     (dispatch) => {
-      
-      api.getUsers( token )
-        .then(res => 
-        dispatch(setUsers({users: res.data}))
+      api.getUsers(token, page)
+        .then(res => {
+          if (page === 1) {
+            dispatch(setUsers({
+              users: res.data,
+              currentPage: res.page,
+              totalPages: res.total_pages,
+              totalUsers: res.total
+            }))
+          } else {
+            dispatch(setMoreUsers({
+              users: res.data,
+              currentPage: page
+            }))
+          }
+        }
         )
-      
+
     };
 
 export const getUserThunk =
   (token: string, id: number): AppThunk =>
     (dispatch) => {
-      
-      api.getUser( token, id )
-        .then(res => 
-        dispatch(setUser({ user: res}))
+      api.getUser(token, id)
+        .then(res =>
+          dispatch(setUser({ user: res.data }))
         )
-      
+
     };
 
 export default usersSlice.reducer;

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './registerform.module.css';
 import { Field, Form, Formik } from 'formik';
 import { ReactComponent as CrossEyeSVG } from '../../../assets/img/crossEye.svg'
-// import { ReactComponent as EyeSVG } from '../../../assets/img/eye.svg'
+import { ReactComponent as EyeSVG } from '../../../assets/img/eye.svg'
 import { getTokenRegister } from '../../../store/reducers/tokenSlice';
 import { useAppDispatch } from '../../../store/hooks';
 import * as yup from 'yup';
@@ -15,6 +15,9 @@ interface Values {
 }
 
 export function RegisterForm() {
+  const [hidePass, toggleHidePass] = useState(true)
+  const [hidePassConfirum, toggleHidePassConfirum] = useState(true)
+
   const validationSchema = yup.object().shape({
     name: yup.string().required('Обязательно введите имя'),
     email: yup.string().email('Введите корректный email').required('Обязательно введите email'),
@@ -34,7 +37,6 @@ export function RegisterForm() {
       validateOnBlur
       onSubmit={(
         values: Values
-        // { setSubmitting }: FormikHelpers<Values>
       ) => {
         dispatch(getTokenRegister(values.email, values.password))
       }}
@@ -52,7 +54,7 @@ export function RegisterForm() {
               onBlur={handleBlur}
               value={values.name}
             />
-          {touched.name && errors.name && <p className={styles.error}>{errors.name}</p>}
+            {touched.name && errors.name && <p className={styles.error}>{errors.name}</p>}
           </div>
           <label className={styles.label} htmlFor="email">Электронная почта</label>
           <div className={styles.wrapper}>
@@ -65,7 +67,7 @@ export function RegisterForm() {
               onBlur={handleBlur}
               value={values.email}
             />
-          {touched.email && errors.email && <p className={styles.error}>{errors.email}</p>}
+            {touched.email && errors.email && <p className={styles.error}>{errors.email}</p>}
           </div>
 
           <label className={styles.label} htmlFor="password">Пароль</label>
@@ -74,12 +76,17 @@ export function RegisterForm() {
               id="password"
               name="password"
               placeholder="Введите пароль"
-              type="password"
+              type={hidePass ? 'password' : 'text'}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.password}
             />
-            <CrossEyeSVG />
+            <span onClick={() => toggleHidePass(hidePass ? false : true)}>
+              {hidePass
+                ? <CrossEyeSVG />
+                : <EyeSVG />
+              }
+            </span>
             {touched.password && errors.password && <p className={styles.error}>{errors.password}</p>}
           </div>
 
@@ -89,12 +96,17 @@ export function RegisterForm() {
               id="passwordConfirum"
               name="passwordConfirum"
               placeholder="Повторите пароль"
-              type="password"
+              type={hidePassConfirum ? 'password' : 'text'}
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.passwordConfirum}
             />
-            <CrossEyeSVG />
+            <span onClick={() => toggleHidePassConfirum(hidePassConfirum ? false : true)}>
+              {hidePassConfirum
+                ? <CrossEyeSVG />
+                : <EyeSVG />
+              }
+            </span>
             {touched.passwordConfirum && errors.passwordConfirum && <p className={styles.error}>{errors.passwordConfirum}</p>}
           </div>
 

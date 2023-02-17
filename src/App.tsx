@@ -1,5 +1,4 @@
 import React from 'react';
-// import styles from './app.module.css';
 import { Layout } from './components/Layout';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { LoginPage } from './components/LoginPage';
@@ -12,8 +11,8 @@ function App() {
       <Switch>
         <Route exact path='/' render={() => <Redirect to={'/login'} />} />
         <Route path='/login' render={() => <LoginPage />} />
-        <Route path='/list' render={() => <EmployeesListPage />} />
-        <Route path='/employee/:id' render={() => <EmployeePage />} />
+        <Route path='/users' render={() => <EmployeesListPage />} />
+        <Route path='/user/:id' render={() => <EmployeePage />} />
 
         <Route path='*' render={() => <div>Страница не найдена</div>} />
 

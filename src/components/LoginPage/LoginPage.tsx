@@ -12,8 +12,8 @@ export function LoginPage() {
 	const token = useAppSelector(state => state.token.token)
 	
 	useEffect(() => {
-		if (token) {
-			history.push('/list')
+		if (token && token !== '') {
+			history.push('/users')
 		} 
 	}, [history, token])
 

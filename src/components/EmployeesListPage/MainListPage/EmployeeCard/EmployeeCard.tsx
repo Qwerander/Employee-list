@@ -16,7 +16,7 @@ export function EmployeeCard({ id, avatar, lastName, firstName }: EmployeeCardTy
   const history = useHistory()
 
   const handleClick = (id: number) => {
-    history.push(`/employee/${id}`)
+    history.push(`/user/${id}`)
   }
 
   return (

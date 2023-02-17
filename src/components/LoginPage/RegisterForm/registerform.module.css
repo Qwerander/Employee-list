@@ -17,10 +17,14 @@
     position: relative;
 }
 
-.wrapper svg {
+.wrapper span {
     position: absolute;
+    padding: 0;
     top: 8px;
     right: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
 }
 
 .wrapper input,
