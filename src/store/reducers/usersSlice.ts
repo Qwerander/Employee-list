@@ -3,14 +3,14 @@ import { AppThunk } from '../store';
 import { api, UserType } from '../../components/api/api';
 
 
-export type TokenStateType = {
+export type UsersStateType = {
   users: Array<UserType>
   currentPage: number
   totalPages: number
   totalUsers: number
 }
 
-const initialState: TokenStateType = {
+const initialState: UsersStateType = {
   users: [],
   currentPage: 0,
   totalPages: 0,
