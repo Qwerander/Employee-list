@@ -3,6 +3,12 @@
 Ознакомится с приложением можно здесь
 https://qwerander.github.io/Employee-list/
 
+для входа используйте 
+email: eve.holt@reqres.in
+password: любой
+
+В форме регистрации email указан по умолчанию. Остальные поля могут быть любыми
+
 ## Available Scripts
 
 In the project directory, you can run:
